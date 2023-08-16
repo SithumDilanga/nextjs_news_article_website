@@ -1,9 +1,9 @@
-// from 1:50
-
-
 import NewsArticleGrid from "@/components/NewsArticleGrid";
 import { NewsArticle, NewsResponse } from "@/models/NewsArticles";
 import { GetStaticPaths, GetStaticProps } from "next";
+import { Head } from "next/document";
+import { useRouter } from "next/router";
+import { Alert } from "react-bootstrap";
 
 interface CategoryNewsPageProps {
   newsArticles: NewsArticle[],
@@ -41,13 +41,30 @@ export const getStaticProps: GetStaticProps<CategoryNewsPageProps> = async ({par
     revalidate: 5 * 60,
   };
 
+  // let error go to 500 page
+
 }
 
 const CategoryNewsPage = ({newsArticles}: CategoryNewsPageProps) => { // use sfc short key to make a component function
+
+  const router = useRouter();
+  const categoryName = router.query.category?.toString();
+
+  const title = "Category: " + categoryName;
+
   return (
+    <>
+    {/* <Head>
+      <title key="title">{`${title} - NextJS News App`}</title>
+    </Head> */}
     <main>
+      <h1>{title}</h1>
+      <Alert>
+        This is page uses <strong>getStaticProps</strong> for very high page loading speed and <strong>incremental static regeneration</strong> to show data not older than <strong>5 minutes</strong>
+      </Alert>
       <NewsArticleGrid articles={newsArticles} />
     </main>
+    </>
   );
 }
  
