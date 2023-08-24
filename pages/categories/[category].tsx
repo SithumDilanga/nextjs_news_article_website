@@ -1,7 +1,7 @@
 import NewsArticleGrid from "@/components/NewsArticleGrid";
 import { NewsArticle, NewsResponse } from "@/models/NewsArticles";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { Head } from "next/document";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { Alert } from "react-bootstrap";
 
